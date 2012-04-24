@@ -1,0 +1,11 @@
+<% form_for :session, :url => session_path do |f| %>
+<% f.fieldset "Log into your account" do %>
+<%= @error || '' %>
+<%= f.text_field 'login' %>
+<%= f.password_field 'password' %>
+<% f.dd 'Remember me', "Stay logged in for 2 weeks" do %>
+<%= f.check_box :remember_me, :label => "" %>
+<% end %>
+<%= f.submit 'Log in' %>
+<% end %>
+<% end %>

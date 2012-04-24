@@ -1,0 +1,14 @@
+<% form_for :cycle, :url => cycle_path(@cycle), :html => {:method => :put} do |f| %>
+<% f.fieldset 'Cycle' do %>
+<% f.dd 'Temperature reading' do %>
+<% reading_options.each do |o| %>
+<%= f.radio_button :reading, o[1], :label => o[0] %>
+<% end %>
+<% end %>
+<% f.dd 'Usage' do %>
+<%= f.radio_button :contraception, true, :label => "Contraception" %>
+<%= f.radio_button :contraception, false, :label => "Conception" %>
+<% end %>
+<%= f.submit 'Save' %>
+<% end %>
+<% end %>

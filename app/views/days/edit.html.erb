@@ -1,0 +1,43 @@
+<% form_for :day, :url => day_path(@day), :html => {:method => :put}  do |f| %>
+<div id="calendar">
+<%= calendar_date_select_tag "e_date", @day.date, :embedded => true, :onchange => "window.location='/days/'+ $F(this)+'/edit'" %>
+</div>
+<% f.fieldset "General" do %>
+<%= f.text_field :temperature %>
+<% f.dd 'Time' do %>
+<%= select :day, :hour, "00".."23", :include_blank => true, :label => "" %>:<%= select :day, :min, every_5_min, :include_blank => true, :label => "" %>
+<% end %>
+<% f.dd 'First Day of Cycle' do %>
+<%= f.check_box :first, :label => "" %>
+<% end %>
+<%= f.select :mensing, menses_options, :include_blank => true, :label=> "Menses" %>
+<%= f.select :intercourse, 1..5, :include_blank => true %>
+<% end %>
+<% f.fieldset "Cervical Fluid" do %>
+<%= f.select :cervical_fluid_feeling, cf_feeling_options, :include_blank => true, :label => "Feeling" %>
+<%= f.select :cervical_fluid_appearance, cf_appearance_options, :include_blank => true, :label => "Appearance" %>
+<% end %>
+<% f.fieldset "Cervix" do %>
+<%= f.select :cervix_position, c_position_options, :include_blank => true, :label => "Position" %>
+<%= f.select :cervix_opening, c_opening_options, :include_blank => true, :label => "Opening" %>
+<%= f.select :cervix_texture, c_texture_options, :include_blank => true, :label => "Texture" %>
+<% end %>
+<% f.fieldset "Other" do %>
+<%= f.check_box :ovulation_pain %>
+<br/>
+<%= f.check_box :tender_breasts %>
+<br/>
+<%= f.check_box :fever %>
+<br/>
+<%= f.check_box :lack_of_sleep %>
+<% end %>
+<div id="buttons">
+    <%= f.submit 'Save' %>
+    <%= f.submit 'Save & Next' %>
+</div>
+<%end %>
+    <%= button_to "Cancel", :controller => "main", :action => "welcome" %>
+    <%= button_to "Delete", { :action => "destroy", :id => @day }, :confirm => "Are you sure?",  :method => :delete, :disabled => @day.new_record? %>
+<div id="chart">
+    <img src="<%= url_for(:controller => 'charts', :action => 'cycle', :id => @day )%>"/>
+</div>

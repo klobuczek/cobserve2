@@ -1,0 +1,6 @@
+<% if logged_in? %>
+  <h3>Welcome, <%= current_user.login %>.</h3>
+<% else %>
+<%= render :partial => "sessions/new" %>
+<%= render :partial => "users/new" %></td>
+<% end %>
